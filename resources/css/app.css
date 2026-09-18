@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-brand-50:  #eff6ff;
+    --color-brand-100: #dbeafe;
+    --color-brand-200: #bfdbfe;
+    --color-brand-300: #93c5fd;
+    --color-brand-400: #60a5fa;
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+    --color-brand-700: #1d4ed8;
+    --color-brand-800: #1e40af;
+    --color-brand-900: #1e3a8a;
+
+    --color-accent-400: #f97316;
+    --color-accent-500: #ea580c;
+    --color-dark-900: #0f172a;
+    --color-dark-800: #1e293b;
+}
+
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 3px; }
+
+.navbar-glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(15, 23, 42, 0.9);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 80%, #0f172a 100%);
+}
+
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+    50% { box-shadow: 0 0 0 14px rgba(59, 130, 246, 0); }
+}
+.btn-pulse { animation: pulse-glow 2.5s infinite; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.7s ease forwards; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delay { animation: float 6s ease-in-out 2s infinite; }
+
+.gradient-text {
+    background: linear-gradient(90deg, #60a5fa, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#mobile-menu {
+    transition: max-height 0.35s ease, opacity 0.35s ease;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+#mobile-menu.open {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.stat-number {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    background: linear-gradient(90deg, #60a5fa, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-alt { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #eff6ff 100%); }
+
+/* ======================================================
+   Admin Panel Styles
+   ====================================================== */
+
+.admin-login-bg {
+    background: linear-gradient(135deg, #0f172a 0%, #1a1f2e 40%, #1e1b30 70%, #0f172a 100%);
+}
+
+.admin-input {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #f1f5f9;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.admin-input::placeholder { color: #64748b; }
+.admin-input:focus {
+    outline: none;
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249,115,22,0.20);
+}
+.admin-input-error {
+    border-color: rgba(248,113,113,0.6) !important;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.15) !important;
+}
+
+.admin-btn-primary {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(249,115,22,0.35);
+}
+.admin-btn-primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+    box-shadow: 0 6px 24px rgba(249,115,22,0.45);
+    transform: translateY(-1px);
+}
+.admin-btn-primary:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
