@@ -192,8 +192,8 @@
                         $initials = strtoupper(substr($member->name, 0, 2));
                     @endphp
                     <div class="card-hover bg-white rounded-2xl p-6 text-center shadow-sm border border-slate-100">
-                        @if($member->profile_image)
-                            <img src="{{ Storage::url($member->profile_image) }}" alt="{{ $member->name }}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover shadow-lg border-2 border-white" />
+                        @if($member->image && is_numeric($member->image))
+                            <img src="{{ route('file.show', $member->image) }}" alt="{{ $member->name }}" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover shadow-lg border-2 border-white" />
                         @else
                             <div class="w-20 h-20 rounded-full {{ $color }} flex items-center justify-center text-white font-bold text-xl mx-auto mb-4 shadow-lg">{{ $initials }}</div>
                         @endif

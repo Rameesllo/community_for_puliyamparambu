@@ -1,9 +1,5 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AnnouncementController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\TeamController;
 use App\Http\Controllers\Admin\AdminAccountController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminLoginController;
@@ -12,6 +8,11 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\TeamController as AdminTeamController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,7 @@ Route::get('/events', [EventController::class, 'index'])->name('events');
 Route::get('/team', [TeamController::class, 'index'])->name('team');
 Route::get('/about', fn () => view('about'))->name('about');
 Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements');
+Route::get('/file/{file}', [FileController::class, 'show'])->name('file.show');
 
 /*
 |--------------------------------------------------------------------------

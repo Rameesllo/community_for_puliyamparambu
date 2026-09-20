@@ -29,8 +29,8 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
                 @forelse($teamMembers->where('role', 'President')->merge($teamMembers->where('role', '!=', 'President')->take(3)) as $member)
                     <div class="card-hover bg-white rounded-2xl p-7 text-center shadow-sm border border-slate-100">
-                        @if($member->image)
-                            <img src="{{ Storage::url($member->image) }}" class="w-24 h-24 rounded-full object-cover mx-auto mb-5 shadow-lg">
+                        @if($member->image && is_numeric($member->image))
+                            <img src="{{ route('file.show', $member->image) }}" class="w-24 h-24 rounded-full object-cover mx-auto mb-5 shadow-lg">
                         @else
                             <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white font-bold text-2xl mx-auto mb-5 shadow-lg">
                                 {{ substr($member->name, 0, 2) }}
@@ -56,8 +56,8 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @forelse($teamMembers->where('role', '!=', 'President')->skip(3) as $member)
                     <div class="card-hover flex items-center gap-4 p-5 bg-white rounded-2xl shadow-sm border border-slate-100">
-                        @if($member->image)
-                            <img src="{{ Storage::url($member->image) }}" class="w-14 h-14 rounded-full object-cover shadow-md">
+                        @if($member->image && is_numeric($member->image))
+                            <img src="{{ route('file.show', $member->image) }}" class="w-14 h-14 rounded-full object-cover shadow-md">
                         @else
                             <div class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white font-bold text-base flex-shrink-0 shadow-md">
                                 {{ substr($member->name, 0, 2) }}

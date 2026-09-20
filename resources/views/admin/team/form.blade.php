@@ -62,13 +62,13 @@
 
                 <div class="sm:col-span-2 mt-2">
                     <label class="block text-sm font-medium text-slate-700 mb-1.5">Profile Image</label>
-                    @if(isset($member) && $member->image)
+                    @if(isset($member) && $member->image && is_numeric($member->image))
                         <div class="mb-3">
-                            <img src="{{ Storage::url($member->image) }}" class="w-20 h-20 rounded-full object-cover border border-slate-200">
+                            <img src="{{ route('file.show', $member->image) }}" class="w-20 h-20 rounded-full object-cover border border-slate-200">
                         </div>
                     @endif
                     <input type="file" name="image" accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
-                    <p class="text-xs text-slate-400 mt-1">Leave empty to keep existing image. Max size: 2MB.</p>
+                    <p class="text-xs text-slate-400 mt-1">Leave empty to keep existing image. Max size: 10MB.</p>
                     @error('image') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
             </div>

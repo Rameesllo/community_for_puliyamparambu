@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use App\Services\ImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class MemberController extends Controller
 {
+    public function __construct(protected ImageService $imageService) {}
+
     public function index(): View
     {
         $members = Member::orderByDesc('joined_at')->get();
@@ -32,15 +34,15 @@ class MemberController extends Controller
             'education_level' => 'required|string|max:255',
             'institution' => 'nullable|string|max:255',
             'skills' => 'nullable|string',
-            'profile_image' => 'nullable|image|max:2048',
             'joined_at' => 'required|date',
             'is_active' => 'boolean',
         ]);
 
         $validated['is_active'] = $request->has('is_active');
 
-        if ($request->hasFile('profile_image')) {
-            $validated['profile_image'] = $request->file('profile_image')->store('members', 'public');
+        if ($request->hasFile('profile_image') && $request->file('profile_image')->isValid()) {
+            $file = $this->imageService->compressAndStore($request->file('profile_image'));
+            $validated['profile_image'] = $file->id;
         }
 
         Member::create($validated);
@@ -62,18 +64,18 @@ class MemberController extends Controller
             'education_level' => 'required|string|max:255',
             'institution' => 'nullable|string|max:255',
             'skills' => 'nullable|string',
-            'profile_image' => 'nullable|image|max:2048',
             'joined_at' => 'required|date',
             'is_active' => 'boolean',
         ]);
 
         $validated['is_active'] = $request->has('is_active');
 
-        if ($request->hasFile('profile_image')) {
-            if ($member->profile_image) {
-                Storage::disk('public')->delete($member->profile_image);
-            }
-            $validated['profile_image'] = $request->file('profile_image')->store('members', 'public');
+        if ($request->hasFile('profile_image') && $request->file('profile_image')->isValid()) {
+            // Delete old image from database first
+            $this->imageService->deleteById((string) $member->profile_image);
+            // Compress and store new image
+            $file = $this->imageService->compressAndStore($request->file('profile_image'));
+            $validated['profile_image'] = $file->id;
         }
 
         $member->update($validated);
@@ -83,9 +85,7 @@ class MemberController extends Controller
 
     public function destroy(Member $member): RedirectResponse
     {
-        if ($member->profile_image) {
-            Storage::disk('public')->delete($member->profile_image);
-        }
+        $this->imageService->deleteById((string) $member->profile_image);
         $member->delete();
 
         return redirect()->route('admin.members.index')->with('status', 'Member deleted successfully!');

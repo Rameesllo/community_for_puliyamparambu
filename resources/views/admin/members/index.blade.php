@@ -35,8 +35,8 @@
                         <tr class="hover:bg-slate-50 transition-colors">
                             <td class="px-5 py-3.5">
                                 <div class="flex items-center gap-3">
-                                    @if($member->profile_image)
-                                        <img src="{{ Storage::url($member->profile_image) }}" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
+                                    @if($member->profile_image && is_numeric($member->profile_image))
+                                        <img src="{{ route('file.show', $member->profile_image) }}" class="w-9 h-9 rounded-full object-cover flex-shrink-0">
                                     @else
                                         <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                                             {{ substr($member->name, 0, 2) }}

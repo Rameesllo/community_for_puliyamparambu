@@ -65,9 +65,10 @@
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1.5">Profile Image (Optional)</label>
                     <input type="file" name="profile_image" accept="image/*" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 transition-all text-sm">
-                    @if(isset($member) && $member->profile_image)
+                    <p class="text-xs text-slate-400 mt-1">Optional. Max size: 20MB. JPG, PNG, GIF supported.</p>
+                    @if(isset($member) && $member->profile_image && is_numeric($member->profile_image))
                         <div class="mt-2 flex items-center gap-2">
-                            <img src="{{ Storage::url($member->profile_image) }}" class="w-10 h-10 rounded-full object-cover">
+                            <img src="{{ route('file.show', $member->profile_image) }}" class="w-10 h-10 rounded-full object-cover">
                             <span class="text-xs text-slate-400">Current image — upload a new one to replace</span>
                         </div>
                     @endif
