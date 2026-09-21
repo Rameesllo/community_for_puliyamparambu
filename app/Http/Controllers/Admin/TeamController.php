@@ -30,9 +30,12 @@ class TeamController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
+            'section' => 'required|string|in:founders,team,alumni',
             'bio' => 'nullable|string',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:255',
+            'linkedin_url' => 'nullable|url|max:255',
+            'instagram_url' => 'nullable|url|max:255',
             'display_order' => 'required|integer',
             'is_active' => 'boolean',
         ]);
@@ -49,21 +52,24 @@ class TeamController extends Controller
         return redirect()->route('admin.team.index')->with('status', 'Team member added successfully!');
     }
 
-    public function edit(TeamMember $teamMember): View
+    public function edit(TeamMember $team): View
     {
-        $member = $teamMember;
+        $member = $team;
 
         return view('admin.team.form', compact('member'));
     }
 
-    public function update(Request $request, TeamMember $teamMember): RedirectResponse
+    public function update(Request $request, TeamMember $team): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
+            'section' => 'required|string|in:founders,team,alumni',
             'bio' => 'nullable|string',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:255',
+            'linkedin_url' => 'nullable|url|max:255',
+            'instagram_url' => 'nullable|url|max:255',
             'display_order' => 'required|integer',
             'is_active' => 'boolean',
         ]);
@@ -72,21 +78,21 @@ class TeamController extends Controller
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             // Delete old image from database first
-            $this->imageService->deleteById((string) $teamMember->image);
+            $this->imageService->deleteById((string) $team->image);
             // Compress and store new image
             $file = $this->imageService->compressAndStore($request->file('image'));
             $validated['image'] = $file->id;
         }
 
-        $teamMember->update($validated);
+        $team->update($validated);
 
         return redirect()->route('admin.team.index')->with('status', 'Team member updated successfully!');
     }
 
-    public function destroy(TeamMember $teamMember): RedirectResponse
+    public function destroy(TeamMember $team): RedirectResponse
     {
-        $this->imageService->deleteById((string) $teamMember->image);
-        $teamMember->delete();
+        $this->imageService->deleteById((string) $team->image);
+        $team->delete();
 
         return redirect()->route('admin.team.index')->with('status', 'Team member deleted successfully!');
     }

@@ -9,7 +9,7 @@
     </div>
 
     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 max-w-3xl">
-        <form action="{{ isset($member) ? route('admin.team.update', $member) : route('admin.team.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+        <form action="{{ isset($member) ? route('admin.team.update', ['team' => $member]) : route('admin.team.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
             @csrf
             @if(isset($member))
                 @method('PUT')
@@ -24,8 +24,18 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1.5">Role / Position</label>
-                    <input type="text" name="role" value="{{ old('role', $member->role ?? '') }}" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-sm" required>
+                    <input type="text" name="role" value="{{ old('role', $member->role ?? '') }}" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-sm" required placeholder="e.g. Founder, President, Coordinator">
                     @error('role') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">Section</label>
+                    <select name="section" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-sm" required>
+                        <option value="founders" {{ old('section', $member->section ?? 'team') === 'founders' ? 'selected' : '' }}>Founders</option>
+                        <option value="team" {{ old('section', $member->section ?? 'team') === 'team' ? 'selected' : '' }}>Team</option>
+                        <option value="alumni" {{ old('section', $member->section ?? 'team') === 'alumni' ? 'selected' : '' }}>Alumni</option>
+                    </select>
+                    @error('section') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="sm:col-span-2">
@@ -44,6 +54,18 @@
                     <label class="block text-sm font-medium text-slate-700 mb-1.5">Phone (Optional)</label>
                     <input type="text" name="phone" value="{{ old('phone', $member->phone ?? '') }}" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-sm">
                     @error('phone') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">LinkedIn Profile URL (Optional)</label>
+                    <input type="url" name="linkedin_url" value="{{ old('linkedin_url', $member->linkedin_url ?? '') }}" placeholder="https://linkedin.com/in/username" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-sm">
+                    @error('linkedin_url') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">Instagram Profile URL (Optional)</label>
+                    <input type="url" name="instagram_url" value="{{ old('instagram_url', $member->instagram_url ?? '') }}" placeholder="https://instagram.com/username" class="w-full px-4 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-sm">
+                    @error('instagram_url') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
                 <div>

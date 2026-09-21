@@ -12,9 +12,7 @@
     {{-- Brand / Logo --}}
     <div class="flex items-center justify-between px-5 py-5 border-b border-slate-800">
         <a href="{{ route('home') }}" class="flex items-center gap-3 group" title="Back to public site">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white font-bold text-base shadow-lg shadow-orange-500/30 group-hover:scale-105 transition-transform">
-                P
-            </div>
+            <img src="{{ asset('images/logo.svg') }}" alt="Puliyamparambu logo" width="36" height="36" class="w-9 h-9 object-contain group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='{{ asset('images/logo.png') }}'" />
             <div>
                 <div class="text-white font-bold text-sm leading-tight">Puliyamparambu</div>
                 <div class="text-orange-400 text-xs leading-tight font-medium">Admin Portal</div>

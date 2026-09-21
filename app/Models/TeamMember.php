@@ -12,10 +12,13 @@ class TeamMember extends Model
     protected $fillable = [
         'name',
         'role',
+        'section',
         'bio',
         'image',
         'email',
         'phone',
+        'linkedin_url',
+        'instagram_url',
         'display_order',
         'is_active',
     ];
@@ -24,4 +27,13 @@ class TeamMember extends Model
         'is_active' => 'boolean',
         'display_order' => 'integer',
     ];
+
+    public static function sections(): array
+    {
+        return [
+            'founders' => 'Founders',
+            'team' => 'Team',
+            'alumni' => 'Alumni',
+        ];
+    }
 }

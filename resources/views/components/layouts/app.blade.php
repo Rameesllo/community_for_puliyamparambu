@@ -7,8 +7,12 @@
     <meta name="description" content="{{ $metaDescription ?? 'Puliyamparambu Youth Community — Empowering the next generation of leaders through education, culture, and service.' }}" />
     <title>{{ $title ?? 'Puliyamparambu Youth Community' }}</title>
 
-    <!-- Favicon placeholder -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>" />
+    <!-- Favicon — transparent background -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/logo.svg') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -19,11 +23,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
 
-                <!-- Logo / Brand -->
+                <!-- Logo / Brand — transparent SVG with PNG fallback -->
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-105 transition-transform">
-                        P
-                    </div>
+                    <img src="{{ asset('images/logo.svg') }}" alt="Puliyamparambu Youth Community logo" width="40" height="40" class="w-10 h-10 object-contain group-hover:scale-105 transition-transform drop-shadow-lg" onerror="this.onerror=null;this.src='{{ asset('images/logo.png') }}'" />
                     <div class="hidden sm:block">
                         <div class="text-white font-bold text-sm leading-tight">Puliyamparambu</div>
                         <div class="text-blue-300 text-xs leading-tight">Youth Community</div>

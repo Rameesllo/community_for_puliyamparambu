@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title">
+  <title>Puliyamparambu Youth Community</title>
+  <desc>Logo — navy e with mint L, transparent background</desc>
+  <!-- Definitions for gap mask (transparent wedge on lower-right) -->
+  <defs>
+    <mask id="outerMask">
+      <rect x="0" y="0" width="200" height="200" fill="white"/>
+      <!-- transparent gap wedge — erases lower-right opening of the e -->
+      <path d="M 138 128 L 176 128 L 176 155 L 130 155 Z" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Navy outer — full disc masked to create C opening -->
+  <g mask="url(#outerMask)">
+    <circle cx="100" cy="100" r="75.5" fill="#12365E"/>
+    <!-- inner white negative space -->
+    <circle cx="100" cy="100" r="42" fill="white"/>
+    <!-- horizontal bar — left segment -->
+    <rect x="24.5" y="91.5" width="33.5" height="17" fill="#12365E"/>
+    <!-- horizontal bar — right stub -->
+    <rect x="142" y="91.5" width="33.5" height="17" fill="#12365E"/>
+  </g>
+
+  <!-- White separation stroke around L -->
+  <path fill="white" d="M 95.3 60.8 L 113.6 60.8 L 113.6 115.6 L 138.8 115.6 L 138.8 131.8 L 95.3 131.8 Z"/>
+
+  <!-- Mint L -->
+  <path fill="#A8D6B5" d="M 97.3 62.8 L 111.6 62.8 L 111.6 116.6 L 135.5 116.6 Q 131.5 124.2 119.8 129.6 L 97.3 129.8 Z"/>
+</svg>
